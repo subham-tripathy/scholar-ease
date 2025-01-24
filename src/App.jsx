@@ -6,6 +6,7 @@ import Home from "./components/Home";
 import NavBar from "./components/NavBar";
 import Schemes from "./components/Schemes";
 import About from "./components/About";
+import Signup from "./components/Signup";
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
         <Route path="/login" element={<Login />}></Route>
         <Route path="/schemes" element={<Schemes />}></Route>
         <Route path="/about" element={<About />}></Route>
+        <Route path="/signup" element={<Signup />}></Route>
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
     </BrowserRouter>

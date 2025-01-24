@@ -1,4 +1,4 @@
-main div#hero::before {
+main#home div#hero::before {
   position: absolute;
   top: 0;
   left: 0;
@@ -12,7 +12,7 @@ main div#hero::before {
   z-index: -1;
 }
 
-main div#hero {
+main#home div#hero {
   min-height: 90vh;
   display: flex;
   flex-direction: column;
@@ -22,11 +22,12 @@ main div#hero {
   text-shadow: 1px 1px 1px black;
 }
 
-main div#hero h1{
+main#home div#hero h1{
   font-size: 50px;
 }
 
-main div#hero button{
+main#home div#hero button{
+  cursor: pointer;
   color: white;
   text-shadow: 1px 1px 3px black;
   background-color: transparent;
