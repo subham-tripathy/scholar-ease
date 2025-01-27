@@ -1,4 +1,3 @@
-import "../styles/login.css";
 import { validateEmail, validateIndianPhoneNumber } from "./functions";
 import React, { useState } from "react";
 
@@ -31,56 +30,72 @@ const Signup = () => {
     }
   };
   return (
-    <main id="login">
-      <div id="main">
-        <h1 style={{ color: "gold" }}>Scholar Ease Login Page</h1>
-        <form id="signUpForm">
+    <main className="flex flex-col items-center bg-gray-200 h-[90vh]">
+      <div className="shadow-black shadow rounded-3xl w-[30%] p-10 mt-14 bg-white">
+        <h1 className="text-4xl mb-10">Scholar Ease Sign Up Page</h1>
+        <form id="signUpForm" className="flex flex-col">
+          <label className="text-lg" htmlFor="name">
+            Name
+          </label>
           <input
+            className="border rounded-lg text-3xl mb-6 px-4 py-2"
             type="text"
             name="name"
             id="name"
-            placeholder="Name:"
             onChange={(e) => {
               setName(e.target.value);
             }}
           />
+          <label className="text-lg" htmlFor="uid">
+            Username
+          </label>
           <input
+            className="border rounded-lg text-3xl mb-6 px-4 py-2"
             type="text"
             name="uid"
             id="uid"
-            placeholder="UID:"
             onChange={(e) => {
               setUid(e.target.value);
             }}
           />
+          <label className="text-lg" htmlFor="email">
+            Email
+          </label>
           <input
+            className="border rounded-lg text-3xl mb-6 px-4 py-2"
             type="email"
             name="email"
             id="email"
-            placeholder="Email:"
             onChange={(e) => {
               setEmail(e.target.value);
             }}
           />
+          <label className="text-lg" htmlFor="phno">
+            Phone Number
+          </label>
           <input
+            className="border rounded-lg text-3xl mb-6 px-4 py-2"
             type="number"
             name="phno"
             id="phno"
-            placeholder="Phone No:"
             onChange={(e) => {
               setPhno(e.target.value);
             }}
           />
+          <label className="text-lg" htmlFor="pw">
+            Password
+          </label>
           <input
+            className="border rounded-lg text-3xl mb-6 px-4 py-2"
             type="password"
             name="pw"
             id="pw"
-            placeholder="Password:"
             onChange={(e) => {
               setPw(e.target.value);
             }}
           />
           <button
+            className="bg-[#4285F4] text-2xl text-white rounded-lg py-2"
             id="signUpBTN"
             onClick={(e) => {
               handleSubmit(e);
