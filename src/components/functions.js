@@ -53,3 +53,4 @@ export function changeNav(e) {
   e.target.classList.add("text-white");
 }
 
+export const BACKEND_BASE_URL = "http://localhost:9898";

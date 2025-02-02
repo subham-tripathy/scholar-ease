@@ -1,11 +1,25 @@
 @import "tailwindcss";
 
 @font-face {
-  font-family: Roboto;
-  src: url("/fonts/Roboto-Regular.ttf");
+  font-family: "Roboto";
+  src: url("/fonts/Roboto-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "SFPRO";
+  src: url("/fonts/SFPRODISPLAYREGULAR.OTF") format("opentype");
+}
+
+@font-face {
+  font-family: "PacificoRegular";
+  src: url("/fonts/Pacifico-Regular.ttf") format("truetype");
 }
 
 * {
-  font-family: Roboto;
+  font-family: "SFPRO", sans-serif !important;
   transition: 0.4s all;
+}
+
+nav > h1 {
+  font-family: "PacificoRegular" !important;
 }

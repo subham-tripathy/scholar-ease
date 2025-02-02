@@ -17,7 +17,7 @@ const Home = () => {
           src="/images/ome-bg(1).jpg"
           className="h-[60vh] border-4 border-[#4285F4] shadow-lg shadow-black rounded-full object-cover mt-40"
         />
-        <div className="rounded-4xl ml-auto w-[45%] text-center bg-white shadow-lg shadow-gray-900 border-2 border-[#4285F4] h-[50vh] mt-50 flex flex-col justify-center">
+        <div className="rounded-4xl ml-auto w-[55%] text-center bg-white shadow-lg shadow-gray-900 border-2 border-[#4285F4] h-[50vh] mt-50 flex flex-col justify-center">
           <h1 className="text-[#4285F4] text-7xl">Empowering Dreams</h1>
           <h1 className="text-[#4285F4] text-7xl my-5">Through Education</h1>
           <button

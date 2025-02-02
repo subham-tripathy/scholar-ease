@@ -4,7 +4,7 @@ const ScholarshipDetailCard = ({ price, path }) => {
   return (
     <div
       style={{ backdropFilter: "blur(10px)", scale:"0"}}
-      className="bg-[rgba(0,0,0,0.0)] fixed h-full w-full top-0 left-0 right-0 bottom-0"
+      className="bg-[rgba(0,0,0,0.0)] fixed h-full w-full top-0 left-0 right-0 bottom-0 z-10"
     >
       <div
         id="scholarshipDetailCard"

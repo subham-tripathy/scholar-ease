@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./components/Login";
 import NotFound from "./components/NotFound";
@@ -7,20 +7,26 @@ import NavBar from "./components/NavBar";
 import Schemes from "./components/Schemes";
 import About from "./components/About";
 import Signup from "./components/Signup";
+import Logout from "./components/Logout";
+import { loggedInContext } from "./contexts";
 
 const App = () => {
+  const [loggedIn, setLoggedIn] = useState(false)
   return (
-    <BrowserRouter>
-      <NavBar />
-      <Routes>
-        <Route path="/" element={<Home />}></Route>
-        <Route path="/login" element={<Login />}></Route>
-        <Route path="/schemes" element={<Schemes />}></Route>
-        <Route path="/about" element={<About />}></Route>
-        <Route path="/signup" element={<Signup />}></Route>
-        <Route path="*" element={<NotFound />}></Route>
-      </Routes>
-    </BrowserRouter>
+    <loggedInContext.Provider value={{ loggedIn, setLoggedIn }}>
+      <BrowserRouter>
+        <NavBar />
+        <Routes>
+          <Route path="/" element={<Home />}></Route>
+          <Route path="/login" element={<Login />}></Route>
+          <Route path="/schemes" element={<Schemes />}></Route>
+          <Route path="/about" element={<About />}></Route>
+          <Route path="/signup" element={<Signup />}></Route>
+          <Route path="/logout" element={<Logout />}></Route>
+          <Route path="*" element={<NotFound />}></Route>
+        </Routes>
+      </BrowserRouter>
+    </loggedInContext.Provider>
   );
 };
 
