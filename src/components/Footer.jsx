@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="text-white text-xl h-[50vh] bg-[dimgray] p-10 grid grid-cols-3 gap-5">
+    <footer className="text-white h-[50vh] bg-[dimgray] p-10 grid grid-cols-3 gap-5">
       <div className="flex flex-col gap-5">
         <h1 className="text-4xl font-bold">Scholar Ease</h1>
         <p>Let your talents and achievements shine with a scholarship.</p>

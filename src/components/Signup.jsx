@@ -55,6 +55,7 @@ const Signup = () => {
         console.log(data);
         if (data.status === "success") {
           globalContext.setLoggedIn(true);
+          localStorage.setItem("scholar-ease-uid", uid);
           navigate("/dashboard");
         } else if (data.status === "user exists") {
           alert("User already exists!");
@@ -68,15 +69,15 @@ const Signup = () => {
       });
   };
   return (
-    <main className="flex flex-col items-center bg-gray-200 h-[92vh]">
-      <div className="shadow-black shadow rounded-xl w-[40%] p-10 mt-5 bg-white">
-        <h1 className="text-4xl mb-10">Scholar Ease Sign Up Page</h1>
+    <main className="flex flex-col items-center bg-gray-200 min-h-[92vh]">
+      <div className="shadow-black shadow rounded-xl w-[25%] px-10 py-7 my-5 bg-white">
+        <h1 className="text-xl mb-5">Scholar Ease Sign Up Page</h1>
         <form id="signUpForm" className="flex flex-col">
-          <label className="text-lg" htmlFor="name">
+          <label className="text-sm" htmlFor="name">
             Name
           </label>
           <input
-            className="border rounded-lg text-xl mb-6 px-4 py-2"
+            className="border rounded text-md mb-4 p-2"
             type="text"
             name="name"
             id="name"
@@ -84,11 +85,11 @@ const Signup = () => {
               setName(e.target.value);
             }}
           />
-          <label className="text-lg" htmlFor="uid">
+          <label className="text-sm" htmlFor="uid">
             Username
           </label>
           <input
-            className="border rounded-lg text-xl mb-6 px-4 py-2"
+            className="border rounded text-md mb-4 p-2"
             type="text"
             name="uid"
             id="uid"
@@ -96,11 +97,11 @@ const Signup = () => {
               setUid(e.target.value);
             }}
           />
-          <label className="text-lg" htmlFor="email">
+          <label className="text-sm" htmlFor="email">
             Email
           </label>
           <input
-            className="border rounded-lg text-xl mb-6 px-4 py-2"
+            className="border rounded text-md mb-4 p-2"
             type="email"
             name="email"
             id="email"
@@ -108,11 +109,11 @@ const Signup = () => {
               setEmail(e.target.value);
             }}
           />
-          <label className="text-lg" htmlFor="phno">
+          <label className="text-sm" htmlFor="phno">
             Phone Number
           </label>
           <input
-            className="border rounded-lg text-xl mb-6 px-4 py-2"
+            className="border rounded text-md mb-4 p-2"
             type="number"
             name="phno"
             id="phno"
@@ -120,11 +121,11 @@ const Signup = () => {
               setPhno(e.target.value);
             }}
           />
-          <label className="text-lg" htmlFor="pw">
+          <label className="text-sm" htmlFor="pw">
             Password
           </label>
           <input
-            className="border rounded-lg text-xl mb-6 px-4 py-2"
+            className="border rounded text-md mb-4 p-2"
             type="password"
             name="pw"
             id="pw"
@@ -133,7 +134,7 @@ const Signup = () => {
             }}
           />
           <button
-            className="bg-[#4285F4] text-2xl text-white rounded-lg py-2"
+            className="cursor-pointer bg-[#4285F4] text-lg text-white rounded-md py-2"
             id="signUpBTN"
             onClick={(e) => {
               handleSubmit(e);

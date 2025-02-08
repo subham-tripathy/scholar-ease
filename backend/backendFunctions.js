@@ -5,7 +5,7 @@ const client = new Client({
   user: "postgres",
   host: "localhost",
   database: "scholar_ease",
-  password: "rajabhai",
+  password: "subham1010",
   port: 5432,
 });
 client
@@ -17,12 +17,16 @@ client
 const loginLogic = (req, res) => {
   const { uid, pw } = req.body;
   client
-    .query("SELECT * FROM users WHERE uid = $1 AND pw = $2", [uid, pw])
+    .query("SELECT * FROM users WHERE uid = $1", [uid])
     .then((data) => {
       if (data.rows.length === 0) {
         res.send({ status: "no user" });
       } else {
-        res.send({ status: "success" });
+        if (data.rows[0].pw == pw) {
+          res.send({ status: "success" });
+        } else {
+          res.send({ status: "pw error" });
+        }
       }
     })
     .catch((err) => {
@@ -54,9 +58,21 @@ const insertUser = (reqBody, res) => {
       res.send({ status: "success" });
     })
     .catch((err) => {
-        console.log(err)
+      console.log(err);
       res.send({ status: "error" });
     });
 };
 
-module.exports = { loginLogic, signUpLogic };
+const getAccountInfo = (req, res) => {
+  const { uid } = req.body;
+  client
+    .query("select * from users where uid = $1", [uid])
+    .then((data) => {
+      res.send(data.rows);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+module.exports = { loginLogic, signUpLogic, getAccountInfo };

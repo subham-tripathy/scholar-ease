@@ -7,11 +7,11 @@ import NavBar from "./components/NavBar";
 import Schemes from "./components/Schemes";
 import About from "./components/About";
 import Signup from "./components/Signup";
-import Logout from "./components/Logout";
 import { loggedInContext } from "./contexts";
+import Dashboard from "./components/Dashboard";
 
 const App = () => {
-  const [loggedIn, setLoggedIn] = useState(false)
+  const [loggedIn, setLoggedIn] = useState(false);
   return (
     <loggedInContext.Provider value={{ loggedIn, setLoggedIn }}>
       <BrowserRouter>
@@ -22,7 +22,7 @@ const App = () => {
           <Route path="/schemes" element={<Schemes />}></Route>
           <Route path="/about" element={<About />}></Route>
           <Route path="/signup" element={<Signup />}></Route>
-          <Route path="/logout" element={<Logout />}></Route>
+          <Route path="/dashboard" element={<Dashboard />}></Route>
           <Route path="*" element={<NotFound />}></Route>
         </Routes>
       </BrowserRouter>

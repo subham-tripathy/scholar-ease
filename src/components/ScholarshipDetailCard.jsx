@@ -3,18 +3,18 @@ import React from "react";
 const ScholarshipDetailCard = ({ price, path }) => {
   return (
     <div
-      style={{ backdropFilter: "blur(10px)", scale:"0"}}
+      style={{ backdropFilter: "blur(10px)", scale: "0" }}
       className="bg-[rgba(0,0,0,0.0)] fixed h-full w-full top-0 left-0 right-0 bottom-0 z-10"
     >
       <div
         id="scholarshipDetailCard"
         className="flex-col gap-10 p-10 w-[90vw] h-[90vh] bg-white rounded-xl border-4 border-black absolute translate-x-[-50%] translate-y-[-50%] top-[50%] left-[50%] flex"
       >
-        <h2 className="text-5xl font-bold">Bright Future Scholarship 2024</h2>
-        <p className="text-4xl font-semibold">Amount: ₹50,000</p>
+        <h2 className="text-3xl font-bold">Bright Future Scholarship 2024</h2>
+        <p className="text-xl font-semibold">Amount: ₹50,000</p>
         <span>
-          <h3 className="text-3xl font-semibold">Eligibility Criteria:</h3>
-          <p className="text-gray-500 text-2xl">
+          <h3 className="text-xl font-semibold">Eligibility Criteria:</h3>
+          <p className="text-gray-600 text-lg">
             Must be a full-time undergraduate student enrolled in a recognized
             university. Minimum academic score of 75% in the previous year.
             Family income should not exceed ₹5,00,000 per annum. Open to
@@ -22,10 +22,10 @@ const ScholarshipDetailCard = ({ price, path }) => {
             Mathematics) fields.
           </p>
         </span>
-        <h3 className="text-3xl">Application Deadline: 5th February 2025</h3>
+        <h3 className="text-xl">Application Deadline: 5th February 2025</h3>
         <span>
-          <h4 className="text-3xl">Details:</h4>
-          <p className="text-gray-500 text-2xl">
+          <h4 className="text-xl">Details:</h4>
+          <p className="text-gray-500 text-lg">
             The Bright Future Scholarship 2024 aims to support meritorious
             students from economically disadvantaged backgrounds who are
             pursuing higher education in STEM fields. This scholarship provides
@@ -46,9 +46,9 @@ const ScholarshipDetailCard = ({ price, path }) => {
           </button>
           <button
             onClick={() => {
-              document
-                .querySelector("#scholarshipDetailCard")
-                .parentElement.style.scale = "0";
+              document.querySelector(
+                "#scholarshipDetailCard"
+              ).parentElement.style.scale = "0";
             }}
             className="cursor-pointer bg-[#dc3545] px-2 py-1 rounded-lg"
           >

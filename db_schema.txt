@@ -1,3 +1,17 @@
 create database scholar_ease;
 
 CREATE TABLE users ( uid VARCHAR(50) PRIMARY KEY, name TEXT NOT NULL, email TEXT UNIQUE NOT NULL, phno VARCHAR(15) NOT NULL, pw TEXT NOT NULL );
+
+CREATE TABLE admins ( uid VARCHAR(50) PRIMARY KEY, name TEXT NOT NULL, email TEXT UNIQUE NOT NULL, phno VARCHAR(15) NOT NULL, pw TEXT NOT NULL );
+
+CREATE TABLE sag_bureau_users ( uid VARCHAR(50) PRIMARY KEY, name TEXT NOT NULL, email TEXT UNIQUE NOT NULL, phno VARCHAR(15) NOT NULL, pw TEXT NOT NULL );
+
+CREATE TABLE finance_bureau_users ( uid VARCHAR(50) PRIMARY KEY, name TEXT NOT NULL, email TEXT UNIQUE NOT NULL, phno VARCHAR(15) NOT NULL, pw TEXT NOT NULL );
+
+CREATE TABLE scholarship_schemes ( scheme_id VARCHAR(50) PRIMARY KEY, scheme_name TEXT NOT NULL, scheme_amount INT NOT NULL, scheme_category TEXT NOT NULL, scheme_deadline DATE NOT NULL, scheme_desc TEXT NOT NULL, scheme_img BYTEA NOT NULL);
+
+
+// MAKE UID AND SCHEME_ID AS JOINT PRIMARY KEY
+CREATE TABLE applied_scholarships ( uid VARCHAR(50), scheme_id VARCHAR(50) status TEXT NOT NULL);
+
+//MAKE A `REALTIME` STATUS BAR JUST LIKE AMAZON

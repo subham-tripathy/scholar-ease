@@ -1,10 +1,14 @@
 const express = require("express");
 const cors = require("cors");
-const { loginLogic, signUpLogic } = require("./backendFunctions");
+const {
+  loginLogic,
+  signUpLogic,
+  getAccountInfo,
+} = require("./backendFunctions");
 
 const app = express();
 
-app.use(cors());
+app.use(cors({ origin: "*" }));
 app.use(express.json());
 
 app.get("/", (req, res) => {
@@ -19,6 +23,10 @@ app.post("/signup", (req, res) => {
   signUpLogic(req, res);
 });
 
-app.listen(9898, () => {
+app.post("/getAccountInfo", (req, res) => {
+  getAccountInfo(req, res);
+});
+
+app.listen(9898, "0.0.0.0", () => {
   console.log("backend server started at port:9898");
 });
