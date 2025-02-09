@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import {
   BACKEND_BASE_URL,
+  errorToast,
+  successToast,
   validateEmail,
   validateIndianPhoneNumber,
 } from "./functions";
@@ -32,15 +34,15 @@ const Signup = () => {
       phno.trim() === "" ||
       pw.trim() === ""
     ) {
-      alert("All fields are required!");
+      errorToast("All fields are required!");
       return;
     }
     if (!validateEmail(email)) {
-      alert("invalid email");
+      errorToast("invalid email");
       return;
     }
     if (!validateIndianPhoneNumber(phno)) {
-      alert("invalid phone number");
+      errorToast("invalid phone number");
       return;
     }
     fetch(BACKEND_BASE_URL + "/signup", {
@@ -56,16 +58,19 @@ const Signup = () => {
         if (data.status === "success") {
           globalContext.setLoggedIn(true);
           localStorage.setItem("scholar-ease-uid", uid);
-          navigate("/dashboard");
+          successToast("Signed Up Successfully");
+          setTimeout(() => {
+            navigate("/dashboard");
+          }, 2000);
         } else if (data.status === "user exists") {
-          alert("User already exists!");
+          errorToast("User already exists!");
         } else {
-          alert("Sign Up Failed!");
+          errorToast("Sign Up Failed!");
         }
       })
       .catch((err) => {
         console.log(err);
-        alert("Sign Up Failed!");
+        errorToast("Sign Up Failed!");
       });
   };
   return (

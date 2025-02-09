@@ -1,12 +1,16 @@
-import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { loggedInContext } from "../contexts";
+import { successToast } from "./functions";
 
 const NavBar = () => {
+  const navigate = useNavigate();
   const globalContext = useContext(loggedInContext);
-  if(localStorage.getItem('scholar-ease-uid')){
-    globalContext.setLoggedIn(true)
-  }
+  useEffect(() => {
+    if (localStorage.getItem("scholar-ease-uid")) {
+      globalContext.setLoggedIn(true);
+    }
+  }, []);
 
   const openMenu = () => {
     document.querySelectorAll("button>img")[0].classList.add("hidden");
@@ -40,7 +44,7 @@ const NavBar = () => {
         </button>
       </div>
 
-      <ul className="bg-white not-sm:z-1 not-sm:fixed not-sm:top-19 not-sm:py-5 hidden not-sm:flex-col not-sm:gap-3 not-sm:left-0 not-sm:right-0 not-sm:text-center lg:flex lg:items-center">
+      <ul className="bg-white not-sm:z-1 not-lg:fixed not-lg:top-19 not-lg:py-5 hidden not-lg:flex-col not-lg:gap-3 not-lg:left-0 not-lg:right-0 not-lg:text-center lg:flex lg:items-center">
         <li>
           <Link
             className="hover:bg-[#4285F4] hover:text-white px-4 py-2 rounded-md text-sm font-semibold"
@@ -51,12 +55,21 @@ const NavBar = () => {
         </li>
         <li>
           {globalContext.loggedIn ? (
-            <Link
-              className="hover:bg-[#4285F4] hover:text-white px-4 py-2 rounded-md text-sm font-semibold"
-              to="/dashboard"
-            >
-              {localStorage.getItem("scholar-ease-uid")}
-            </Link>
+            localStorage.getItem("scholar-ease-uid").includes("admin") ? (
+              <Link
+                className="hover:bg-[#4285F4] hover:text-white px-4 py-2 rounded-md text-sm font-semibold"
+                to="/admin"
+              >
+                Admin Panel
+              </Link>
+            ) : (
+              <Link
+                className="hover:bg-[#4285F4] hover:text-white px-4 py-2 rounded-md text-sm font-semibold"
+                to="/dashboard"
+              >
+                {localStorage.getItem("scholar-ease-uid")}
+              </Link>
+            )
           ) : (
             <Link
               className="hover:bg-[#4285F4] hover:text-white px-4 py-2 rounded-md text-sm font-semibold"
@@ -85,10 +98,14 @@ const NavBar = () => {
         <li>
           {globalContext.loggedIn ? (
             <button
-              className="hover:bg-[#4285F4] hover:text-white px-4 py-2 rounded-md text-xl font-bold cursor-pointer"
+              className="hover:bg-[#4285F4] hover:text-white px-4 py-2 rounded-md text-sm font-semibold cursor-pointer"
               onClick={() => {
                 globalContext.setLoggedIn(false);
                 localStorage.removeItem("scholar-ease-uid");
+                successToast("Logged out successfully");
+                setTimeout(() => {
+                  navigate("/");
+                }, 2000);
               }}
             >
               Logout

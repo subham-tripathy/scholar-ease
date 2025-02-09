@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { BACKEND_BASE_URL } from "./functions";
+import { BACKEND_BASE_URL, errorToast, successToast } from "./functions";
 import { loggedInContext } from "../contexts";
 
 const Login = () => {
@@ -41,13 +41,23 @@ const Login = () => {
           if (data.status === "success") {
             globalContext.setLoggedIn(true);
             localStorage.setItem("scholar-ease-uid", uid);
-            navigate("/dashboard");
+            successToast("Logged In Successfully");
+            setTimeout(() => {
+              navigate("/dashboard");
+            }, 2000);
+          } else if (data.status === "success-admin") {
+            globalContext.setLoggedIn(true);
+            localStorage.setItem("scholar-ease-uid", uid);
+            successToast("Admin Logged In Successfully");
+            setTimeout(() => {
+              navigate("/admin");
+            }, 2000);
           } else if (data.status === "no user") {
-            alert("No User Found");
+            errorToast("No User Found");
           } else if (data.status === "pw error") {
-            alert("Incorrect Password");
+            errorToast("Incorrect Password");
           } else {
-            alert("Invalid Username or Password");
+            errorToast("Invalid Username or Password");
           }
         });
     });

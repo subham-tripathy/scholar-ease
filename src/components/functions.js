@@ -1,3 +1,5 @@
+import { toast } from "react-toastify";
+
 const validEmailExtensions = [
   "gmail",
   "outlook",
@@ -52,5 +54,29 @@ export function changeNav(e) {
   e.target.classList.remove("hover:text-white");
   e.target.classList.add("text-white");
 }
+
+export const successToast = (msg) => {
+  toast.success(msg, {
+    position: "top-right",
+    autoClose: 1000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    theme: "light",
+  });
+};
+
+export const errorToast = (msg) => {
+  toast.error(msg, {
+    position: "top-right",
+    autoClose: 1000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    theme: "light",
+  });
+};
 
 export const BACKEND_BASE_URL = "http://localhost:9898";

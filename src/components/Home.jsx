@@ -3,6 +3,7 @@ import Footer from "./Footer";
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  document.title = "Scholar Ease - Home";
   const navigate = useNavigate();
   return (
     <main id="home" className="bg-gray-200">

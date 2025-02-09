@@ -8,7 +8,7 @@ const ScholarshipDetailCard = ({ price, path }) => {
     >
       <div
         id="scholarshipDetailCard"
-        className="flex-col gap-10 p-10 w-[90vw] h-[90vh] bg-white rounded-xl border-4 border-black absolute translate-x-[-50%] translate-y-[-50%] top-[50%] left-[50%] flex"
+        className="flex flex-col gap-3 p-10 w-[90vw] h-[90vh] bg-white rounded-xl border-4 border-black absolute translate-x-[-50%] translate-y-[-50%] top-[50%] left-[50%]"
       >
         <h2 className="text-3xl font-bold">Bright Future Scholarship 2024</h2>
         <p className="text-xl font-semibold">Amount: ₹50,000</p>
@@ -40,7 +40,7 @@ const ScholarshipDetailCard = ({ price, path }) => {
             onClick={() => {
               navigate(path);
             }}
-            className="cursor-pointer bg-[#4285F4] px-2 py-1 rounded-lg"
+            className="cursor-pointer bg-[#4285F4] px-2 py-1 rounded-lg invisible"
           >
             Apply Now
           </button>

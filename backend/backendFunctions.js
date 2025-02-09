@@ -23,7 +23,11 @@ const loginLogic = (req, res) => {
         res.send({ status: "no user" });
       } else {
         if (data.rows[0].pw == pw) {
-          res.send({ status: "success" });
+          if (data.rows[0].type === "admin") {
+            res.send({ status: "success-admin" });
+          } else {
+            res.send({ status: "success" });
+          }
         } else {
           res.send({ status: "pw error" });
         }
