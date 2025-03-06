@@ -1,61 +1,43 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ScholarshipCard from "./ScholarshipCard";
 import Footer from "./Footer";
 import ScholarshipDetailCard from "./ScholarshipDetailCard";
+import { BACKEND_BASE_URL } from "./functions";
 
 const Schemes = () => {
   document.title = "Scholar Ease - Schemes";
+  const [dataArray, setDataArray] = useState(null);
+  useEffect(() => {
+    fetch(BACKEND_BASE_URL + "/fetchAllSchemes", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setDataArray(data);
+      });
+  }, []);
+
   return (
     <main className="bg-gray-200 min-h-[92vh]">
       <div className="p-5 grid grid-cols-4 w-full mx-auto">
-        <ScholarshipCard
-          price={"1000"}
-          title={"ScholarShip Scheme - 1"}
-          path={"/apply?id=1"}
-          img={"/images/scholarships/img1.webp"}
-        />
-        <ScholarshipCard
-          price={"2000"}
-          title={"ScholarShip Scheme - 2"}
-          path={"/apply?id=2"}
-          img={"/images/scholarships/img2.webp"}
-        />
-        <ScholarshipCard
-          price={"3000"}
-          title={"ScholarShip Scheme - 3"}
-          path={"/apply?id=3"}
-          img={"/images/scholarships/img3.webp"}
-        />
-        <ScholarshipCard
-          price={"4000"}
-          title={"ScholarShip Scheme - 4"}
-          path={"/apply?id=4"}
-          img={"/images/scholarships/img4.webp"}
-        />
-        <ScholarshipCard
-          price={"1000"}
-          title={"ScholarShip Scheme - 1"}
-          path={"/apply?id=1"}
-          img={"/images/scholarships/img1.webp"}
-        />
-        <ScholarshipCard
-          price={"2000"}
-          title={"ScholarShip Scheme - 2"}
-          path={"/apply?id=2"}
-          img={"/images/scholarships/img2.webp"}
-        />
-        <ScholarshipCard
-          price={"3000"}
-          title={"ScholarShip Scheme - 3"}
-          path={"/apply?id=3"}
-          img={"/images/scholarships/img3.webp"}
-        />
-        <ScholarshipCard
-          price={"4000"}
-          title={"ScholarShip Scheme - 4"}
-          path={"/apply?id=4"}
-          img={"/images/scholarships/img4.webp"}
-        />
+        {dataArray != null ? (
+          dataArray.map((e) => (
+            <ScholarshipCard
+              key={e.scheme_id}
+              id={e.scheme_id}
+              price={e.scheme_amt}
+              title={e.scheme_name}
+              path={"/apply?id=" + e.scheme_id}
+              img={"/images/scholarships/img1.webp"}
+              arr={dataArray}
+            />
+          ))
+        ) : (
+          <></>
+        )}
       </div>
       <ScholarshipDetailCard />
       <Footer />

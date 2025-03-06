@@ -2,12 +2,13 @@ import React, { useContext, useEffect } from "react";
 import { BACKEND_BASE_URL } from "./functions";
 import { useNavigate } from "react-router-dom";
 import { loggedInContext } from "../contexts";
+import Footer from "./Footer";
 
 const Dashboard = () => {
   document.title = "Scholar Ease - Dashboard";
   const globalContext = useContext(loggedInContext);
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     if (
       localStorage.getItem("scholar-ease-uid") === null ||
@@ -44,21 +45,24 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <main>
-      <div className="w-[90%] mx-auto rounded-lg border-3 border-white shadow-md shadow-gray-700 flex bg-[#4285F4] text-white">
-        <img
-          className="w-[25%] my-5"
-          src="https://static.vecteezy.com/system/resources/previews/019/879/186/non_2x/user-icon-on-transparent-background-free-png.png"
-        />
-        <div className="m-10 flex flex-col justify-between">
-          <h1 className="text-5xl font-semibold" id="dashboardName"></h1>
-          <h1 className="text-xl font-semibold" id="dashboardUID"></h1>
-          <h2 className="" id="dashboardType"></h2>
-          <h2 className="" id="dashboardEmail"></h2>
-          <h2 className="" id="dashboardPhno"></h2>
+    <>
+      <main className="bg-gray-200 min-h-[89vh] pt-5">
+        <div className="w-[90%] mx-auto rounded-lg border-3 border-white shadow-md shadow-gray-700 flex bg-[#4285F4] text-white">
+          <img
+            className="w-[25%] my-5"
+            src="https://static.vecteezy.com/system/resources/previews/019/879/186/non_2x/user-icon-on-transparent-background-free-png.png"
+          />
+          <div className="m-10 flex flex-col justify-between">
+            <h1 className="text-5xl font-semibold" id="dashboardName"></h1>
+            <h1 className="text-xl font-semibold" id="dashboardUID"></h1>
+            <h2 className="" id="dashboardType"></h2>
+            <h2 className="" id="dashboardEmail"></h2>
+            <h2 className="" id="dashboardPhno"></h2>
+          </div>
         </div>
-      </div>
-    </main>
+      </main>
+      <Footer />
+    </>
   );
 };
 

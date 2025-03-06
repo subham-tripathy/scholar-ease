@@ -1,12 +1,29 @@
 create database scholar_ease;
 
+
+
 CREATE TABLE users ( uid VARCHAR(50) PRIMARY KEY, name TEXT NOT NULL, email TEXT UNIQUE NOT NULL, phno VARCHAR(15) NOT NULL, type TEXT NOT NULL DEFAULT 'student', pw TEXT NOT NULL );
 insert into users (uid, name, email, phno, type, pw) values ('subham-admin', 'Subham Tripathy', 'subhamtripathy@gmail.com', '6371750963', 'admin', 'subham1010');
+
+
 
 CREATE TABLE scholarship_schemes ( scheme_id VARCHAR(50) PRIMARY KEY, scheme_name TEXT NOT NULL, scheme_amount INT NOT NULL, scheme_category TEXT NOT NULL, scheme_deadline DATE NOT NULL, scheme_desc TEXT NOT NULL, scheme_img BYTEA NOT NULL);
 
 
-// MAKE UID AND SCHEME_ID AS JOINT PRIMARY KEY
+
 CREATE TABLE applied_scholarships ( uid VARCHAR(50), scheme_id VARCHAR(50), status TEXT NOT NULL, PRIMARY KEY (uid, scheme_id));
 
-//MAKE A `REALTIME` STATUS BAR JUST LIKE AMAZON
+
+
+CREATE TABLE all_scholarships ( scheme_id VARCHAR(50), scheme_name TEXT, scheme_amt INTEGER, scheme_desc TEXT, eligibility_criteria TEXT, deadline DATE, PRIMARY KEY (scheme_id));
+INSERT INTO all_scholarships (scheme_id, scheme_name, scheme_amt, scheme_desc, eligibility_criteria, deadline) VALUES
+('SCH001', 'Academic Excellence Scholarship', 1500, 'Awarded to students with top academic performance in their respective courses.', 'Must have a GPA of 3.8 or higher.', '2025-06-30'),
+('SCH002', 'Merit-Based Scholarship', 2000, 'For students demonstrating exceptional academic ability and achievements.', 'Open to students with a GPA of 3.5 or above.', '2025-05-15'),
+('SCH003', 'Community Leadership Scholarship', 1000, 'Given to students actively involved in community service and leadership roles.', 'Minimum 50 hours of community service in the past year.', '2025-08-20'),
+('SCH004', 'Sports Achievement Scholarship', 1200, 'For athletes who have demonstrated excellence in their respective sports.', 'Must be a varsity athlete in a recognized sport.', '2025-07-01'),
+('SCH005', 'Research Grant Scholarship', 2500, 'Provides funding to students pursuing advanced research projects in various fields.', 'Must be enrolled in a graduate program or higher.', '2025-09-15'),
+('SCH006', 'STEM Scholarship', 1800, 'Awarded to students majoring in Science, Technology, Engineering, or Mathematics fields.', 'Must be enrolled in a STEM major.', '2025-10-10'),
+('SCH007', 'International Student Scholarship', 2200, 'A scholarship for international students to support their education abroad.', 'Only open to international students.', '2025-06-25'),
+('SCH008', 'Arts and Culture Scholarship', 1300, 'For students pursuing studies in the arts, including music, theatre, and visual arts.', 'Must be enrolled in an arts program or have a portfolio submission.', '2025-07-30'),
+('SCH009', 'Financial Need Scholarship', 1600, 'Assists students who demonstrate significant financial need for their education.', 'Applicant must provide proof of financial need.', '2025-05-30'),
+('SCH010', 'Entrepreneurship Scholarship', 1400, 'Awarded to students with a strong interest in business and entrepreneurship initiatives.', 'Must have a business plan or startup idea.', '2025-06-10');

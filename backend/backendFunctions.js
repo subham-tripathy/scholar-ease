@@ -79,4 +79,15 @@ const getAccountInfo = (req, res) => {
     });
 };
 
-module.exports = { loginLogic, signUpLogic, getAccountInfo };
+const fetchAllSchemes = (req, res) => {
+  client
+    .query("select * from all_scholarships")
+    .then((data) => {
+      res.send(data.rows);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+module.exports = { loginLogic, signUpLogic, getAccountInfo, fetchAllSchemes };

@@ -1,7 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { revealScholarshipDetailCard } from "./functions";
 
-const ScholarshipCard = ({ img, price, title, path }) => {
+const ScholarshipCard = ({ id, img, price, title, path, arr}) => {
   const navigate = useNavigate();
   return (
     <div className="flex flex-col bg-white p-4 m-4 rounded-md shadow-md shadow-black w-[250px] h-[300px]">
@@ -22,9 +23,7 @@ const ScholarshipCard = ({ img, price, title, path }) => {
         </button>
         <button
           onClick={() => {
-            document.querySelector(
-              "#scholarshipDetailCard"
-            ).parentElement.style.scale = "1";
+            revealScholarshipDetailCard(id, arr);
           }}
           className="cursor-pointer text-sm"
         >

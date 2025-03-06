@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSearchParams } from "react-router-dom";
+import { successToast } from "./functions";
 
 const Apply = () => {
   const [searchParams] = useSearchParams();
@@ -49,7 +50,7 @@ const Apply = () => {
             <option value="st">ST</option>
             <option value="sc">SC</option>
           </select>
-          
+
           <label className="text-sm" htmlFor="doc">
             Upload Required Document:
           </label>
@@ -68,7 +69,13 @@ const Apply = () => {
             placeholder="Enter Aadhar Number"
             id="aadhar"
           />
-          <button className="cursor-pointer bg-[#4285F4] text-lg text-white rounded-md py-2">
+          <button
+            className="cursor-pointer bg-[#4285F4] text-lg text-white rounded-md py-2"
+            onClick={(e) => {
+              e.preventDefault();
+              successToast("Application Form Submitted Successfully");
+            }}
+          >
             Submit Application Form
           </button>
         </form>

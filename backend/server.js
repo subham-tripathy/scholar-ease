@@ -4,6 +4,7 @@ const {
   loginLogic,
   signUpLogic,
   getAccountInfo,
+  fetchAllSchemes,
 } = require("./backendFunctions");
 
 const app = express();
@@ -25,6 +26,10 @@ app.post("/signup", (req, res) => {
 
 app.post("/getAccountInfo", (req, res) => {
   getAccountInfo(req, res);
+});
+
+app.post("/fetchAllSchemes", (req, res) => {
+  fetchAllSchemes(req, res);
 });
 
 app.listen(9898, "0.0.0.0", () => {

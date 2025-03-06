@@ -79,4 +79,27 @@ export const errorToast = (msg) => {
   });
 };
 
+export const revealScholarshipDetailCard = (id, arr) => {
+  const card = document.querySelector("#scholarshipDetailCard");
+  const item = arr.find((item) => item.scheme_id == id);
+  console.log(item);
+  card.querySelector("#cardName").textContent = item.scheme_name;
+  card.querySelector("#cardAmt").textContent = "Amount: ₹" + item.scheme_amt;
+  card.querySelector("#cardDesc").textContent = item.scheme_desc;
+  card.querySelector("#eligibility").textContent = item.eligibility_criteria;
+  let date = new Date(item.deadline);
+  const day = String(date.getDate()).padStart(2, "0");
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const year = date.getFullYear();
+  const shortDate = `${day}/${month}/${year}`;
+  card.querySelector("#cardDeadLine").textContent =
+    "Application Deadline: " + shortDate;
+  card.parentElement.style.scale = "1";
+};
+
+export const closeScholarshipDetailCard = () => {
+  document.querySelector("#scholarshipDetailCard").parentElement.style.scale =
+    "0";
+};
+
 export const BACKEND_BASE_URL = "http://localhost:9898";
