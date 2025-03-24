@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+@layer utilities {
+  .text-shadow-light {
+    text-shadow: 1px 1px 3px black;
+  }
+  .text-shadow-blue {
+    text-shadow: 1px 1px 3px #4285f4;
+  }
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("/fonts/Roboto-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "SFPRO";
+  src: url("/fonts/SFPRODISPLAYREGULAR.OTF") format("opentype");
+}
+
+@font-face {
+  font-family: "PacificoRegular";
+  src: url("/fonts/Pacifico-Regular.ttf") format("truetype");
+}
+
+* {
+  font-family: "SFPRO", sans-serif !important;
+  transition: 0.4s all;
+}

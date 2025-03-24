@@ -1,29 +1,168 @@
 create database scholar_ease;
 
+\c scholar_ease
+
+CREATE TABLE users (
+    uid VARCHAR(50) PRIMARY KEY,
+    name TEXT NOT NULL,
+    email TEXT UNIQUE NOT NULL,
+    phno VARCHAR(15) NOT NULL,
+    account_type TEXT NOT NULL DEFAULT 'student',
+    gender VARCHAR(10) CHECK (gender IN ('Male', 'Female', 'Other')),
+    profile_pic VARCHAR(255),
+    pw TEXT NOT NULL
+);
+
+insert into users (uid, name, email, phno, account_type, gender, pw) values ('admin', 'ADMIN', 'admin.scholar.ease@gmail.com', '6371750963', 'admin', 'Male', 'admin@1010');
+
+insert into users (uid, name, email, phno, account_type, gender, pw) values ('subham-tripathy', 'Subham Tripathy', 'subhamtripathy@gmail.com', '6371750963', 'student', 'Male', 'subham1010');
+insert into users (uid, name, email, phno, account_type, gender, pw) values ('soumya-moharana', 'Soumya Moharana', 'soumyamoharana@gmail.com', '8093994841', 'student', 'Male', 'soumya1010');
+insert into users (uid, name, email, phno, account_type, gender, pw) values ('baswa-sai-kiran', 'Baswa Sai Kiran', 'baswasaikiran@gmail.com', '6370886613', 'student', 'Male', 'saikiran1010');
+
+insert into users (uid, name, email, phno, account_type, gender, pw) values ('aman-singh', 'Aman Singh', 'amansingh@gmail.com', '8249405938', 'student', 'Male', 'aman1010');
+insert into users (uid, name, email, phno, account_type, gender, pw) values ('gyaneswar-nayak', 'Gyaneswar Nayak', 'gyaneswarnayak@gmail.com', '7077816380', 'student', 'Male', 'gyan1010');
 
 
-CREATE TABLE users ( uid VARCHAR(50) PRIMARY KEY, name TEXT NOT NULL, email TEXT UNIQUE NOT NULL, phno VARCHAR(15) NOT NULL, type TEXT NOT NULL DEFAULT 'student', pw TEXT NOT NULL );
-insert into users (uid, name, email, phno, type, pw) values ('subham-admin', 'Subham Tripathy', 'subhamtripathy@gmail.com', '6371750963', 'admin', 'subham1010');
 
 
 
-CREATE TABLE scholarship_schemes ( scheme_id VARCHAR(50) PRIMARY KEY, scheme_name TEXT NOT NULL, scheme_amount INT NOT NULL, scheme_category TEXT NOT NULL, scheme_deadline DATE NOT NULL, scheme_desc TEXT NOT NULL, scheme_img BYTEA NOT NULL);
 
 
 
-CREATE TABLE applied_scholarships ( uid VARCHAR(50), scheme_id VARCHAR(50), status TEXT NOT NULL, PRIMARY KEY (uid, scheme_id));
+
+CREATE TABLE user_details(
+    date_of_birth,
+    nationality,
+    address,
+
+    -- Academic details
+    class_10_board VARCHAR(100) NOT NULL,
+    class_10_passing_year INT CHECK (class_10_passing_year > 1900),
+    class_10_percentage DECIMAL(5,2) CHECK (class_10_percentage BETWEEN 0 AND 100),
+    class_10_certificate VARCHAR(255),  -- Class 10th certificate
+
+    class_12_type VARCHAR(10) CHECK (class_12_type IN ('12th', 'Diploma')) NOT NULL,  -- Added field
+    class_12_board VARCHAR(100),
+    class_12_passing_year INT CHECK (class_12_passing_year > 1900),
+    class_12_percentage DECIMAL(5,2) CHECK (class_12_percentage BETWEEN 0 AND 100),
+    class_12_certificate VARCHAR(255),  -- Class 12th or Diploma certificate
+
+    -- Family details
+    father_name VARCHAR(255) NOT NULL,
+    father_occupation VARCHAR(100),
+    mother_name VARCHAR(255) NOT NULL,
+    mother_occupation VARCHAR(100),
+    family_income DECIMAL(10,2) CHECK (family_income >= 0),
+
+    -- Document uploads
+    identity_proof VARCHAR(255),
+    residence_certificate VARCHAR(255),  -- Renamed from address_proof
+    income_certificate VARCHAR(255),
+    caste_certificate VARCHAR(255),
+    pan_card VARCHAR(255),
+    bank_account_number VARCHAR(20) UNIQUE,
+    ifsc_code VARCHAR(20),
+    passbook_photo BYTEA,
+
+    digital_signature BYTEA,
+
+);
 
 
 
-CREATE TABLE all_scholarships ( scheme_id VARCHAR(50), scheme_name TEXT, scheme_amt INTEGER, scheme_desc TEXT, eligibility_criteria TEXT, deadline DATE, PRIMARY KEY (scheme_id));
-INSERT INTO all_scholarships (scheme_id, scheme_name, scheme_amt, scheme_desc, eligibility_criteria, deadline) VALUES
-('SCH001', 'Academic Excellence Scholarship', 1500, 'Awarded to students with top academic performance in their respective courses.', 'Must have a GPA of 3.8 or higher.', '2025-06-30'),
-('SCH002', 'Merit-Based Scholarship', 2000, 'For students demonstrating exceptional academic ability and achievements.', 'Open to students with a GPA of 3.5 or above.', '2025-05-15'),
-('SCH003', 'Community Leadership Scholarship', 1000, 'Given to students actively involved in community service and leadership roles.', 'Minimum 50 hours of community service in the past year.', '2025-08-20'),
-('SCH004', 'Sports Achievement Scholarship', 1200, 'For athletes who have demonstrated excellence in their respective sports.', 'Must be a varsity athlete in a recognized sport.', '2025-07-01'),
-('SCH005', 'Research Grant Scholarship', 2500, 'Provides funding to students pursuing advanced research projects in various fields.', 'Must be enrolled in a graduate program or higher.', '2025-09-15'),
-('SCH006', 'STEM Scholarship', 1800, 'Awarded to students majoring in Science, Technology, Engineering, or Mathematics fields.', 'Must be enrolled in a STEM major.', '2025-10-10'),
-('SCH007', 'International Student Scholarship', 2200, 'A scholarship for international students to support their education abroad.', 'Only open to international students.', '2025-06-25'),
-('SCH008', 'Arts and Culture Scholarship', 1300, 'For students pursuing studies in the arts, including music, theatre, and visual arts.', 'Must be enrolled in an arts program or have a portfolio submission.', '2025-07-30'),
-('SCH009', 'Financial Need Scholarship', 1600, 'Assists students who demonstrate significant financial need for their education.', 'Applicant must provide proof of financial need.', '2025-05-30'),
-('SCH010', 'Entrepreneurship Scholarship', 1400, 'Awarded to students with a strong interest in business and entrepreneurship initiatives.', 'Must have a business plan or startup idea.', '2025-06-10');
+
+CREATE TABLE all_scholarships (
+    scheme_id VARCHAR(50) PRIMARY KEY,
+    scheme_name TEXT NOT NULL,
+    scheme_amount INT NOT NULL,
+    scheme_eligibility_class_12_cgpa,
+    scheme_eligibility_class_10_cgpa,
+    scheme_eligibility_category,
+    scheme_eligibility_gender,
+    scheme_category TEXT NOT NULL,
+    scheme_deadline DATE NOT NULL,
+    scheme_desc TEXT NOT NULL,
+    scheme_img TEXT NOT NULL
+);
+
+
+
+CREATE TABLE scholarship_applicants (
+    serial_no SERIAL PRIMARY KEY,
+    student_id VARCHAR(50),
+    full_name VARCHAR(255) NOT NULL,
+    date_of_birth DATE NOT NULL,
+    gender VARCHAR(10) CHECK (gender IN ('Male', 'Female', 'Other')),
+    nationality VARCHAR(50) NOT NULL,
+    contact_number VARCHAR(15) NOT NULL UNIQUE,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    address TEXT NOT NULL,
+    photograph VARCHAR(255),
+    digital_signature VARCHAR(255),
+
+    -- Academic details
+    class_10_board VARCHAR(100) NOT NULL,
+    class_10_passing_year INT CHECK (class_10_passing_year > 1900),
+    class_10_percentage DECIMAL(5,2) CHECK (class_10_percentage BETWEEN 0 AND 100),
+    class_10_certificate VARCHAR(255),
+
+    class_12_type VARCHAR(10) CHECK (class_12_type IN ('12th', 'Diploma')) NOT NULL,
+    class_12_board VARCHAR(100),
+    class_12_passing_year INT CHECK (class_12_passing_year > 1900),
+    class_12_percentage DECIMAL(5,2) CHECK (class_12_percentage BETWEEN 0 AND 100),
+    class_12_certificate VARCHAR(255),
+
+    -- Family details
+    father_name VARCHAR(255) NOT NULL,
+    father_occupation VARCHAR(100),
+    mother_name VARCHAR(255) NOT NULL,
+    mother_occupation VARCHAR(100),
+    family_income DECIMAL(10,2) CHECK (family_income >= 0),
+
+    -- Scholarship details
+    scholarship_id VARCHAR(50) NOT NULL,
+
+    -- Document uploads
+    identity_proof VARCHAR(255),
+    residence_certificate VARCHAR(255),
+    income_certificate VARCHAR(255),
+    caste_certificate VARCHAR(255),
+    pan_card VARCHAR(255),
+    bank_account_number VARCHAR(20),
+    ifsc_code VARCHAR(20),
+    passbook_photo VARCHAR(255),
+
+    application_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE all_scholarships (
+    scheme_id SERIAL PRIMARY KEY,
+    scheme_name VARCHAR(255) NOT NULL UNIQUE,
+    scheme_amt INT NOT NULL,
+    scheme_desc TEXT,
+    eligibility_criteria TEXT,
+    deadline DATE
+);
+
+
+
+INSERT INTO all_scholarships (scheme_name, scheme_amt, scheme_desc, eligibility_criteria, deadline) VALUES
+('Academic Excellence Scholarship', 1500, 'Awarded to students with top academic performance in their respective courses.', 'Must have a GPA of 3.8 or higher.', '2025-06-30'),
+('Merit-Based Scholarship', 2000, 'For students demonstrating exceptional academic ability and achievements.', 'Open to students with a GPA of 3.5 or above.', '2025-05-15'),
+('Community Leadership Scholarship', 1000, 'Given to students actively involved in community service and leadership roles.', 'Minimum 50 hours of community service in the past year.', '2025-08-20'),
+('Sports Achievement Scholarship', 1200, 'For athletes who have demonstrated excellence in their respective sports.', 'Must be a varsity athlete in a recognized sport.', '2025-07-01'),
+('Research Grant Scholarship', 2500, 'Provides funding to students pursuing advanced research projects in various fields.', 'Must be enrolled in a graduate program or higher.', '2025-09-15'),
+('STEM Scholarship', 1800, 'Awarded to students majoring in Science, Technology, Engineering, or Mathematics fields.', 'Must be enrolled in a STEM major.', '2025-10-10'),
+('International Student Scholarship', 2200, 'A scholarship for international students to support their education abroad.', 'Only open to international students.', '2025-06-25'),
+('Arts and Culture Scholarship', 1300, 'For students pursuing studies in the arts, including music, theatre, and visual arts.', 'Must be enrolled in an arts program or have a portfolio submission.', '2025-07-30'),
+('Financial Need Scholarship', 1600, 'Assists students who demonstrate significant financial need for their education.', 'Applicant must provide proof of financial need.', '2025-05-30'),
+('Entrepreneurship Scholarship', 1400, 'Awarded to students with a strong interest in business and entrepreneurship initiatives.', 'Must have a business plan or startup idea.', '2025-06-10');
