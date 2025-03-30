@@ -241,6 +241,66 @@ const fetchHistory = (req, res) => {
     });
 };
 
+const fetchAllSAGmembers = (req, res) => {
+  client
+    .query("select * from users where account_type = 'sag'")
+    .then((data) => {
+      res.send(data.rows);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.send({ status: "error" });
+    });
+};
+
+const deleteSAGmember = (req, res) => {
+  const { sagID } = req.body;
+  console.log("sagID: " + sagID);
+  client.query("delete from users where uid = $1", [sagID]).then((data) => {
+    if (data.rowCount == 1) {
+      res.json({
+        status: true,
+        message: "Deleted Successfully",
+      });
+    } else {
+      res.json({
+        status: false,
+        message: "An Error Occurred !",
+      });
+    }
+  });
+};
+
+const addSAGmember = (req, res) => {
+  const { SAGid, SAGname, SAGgender, SAGemail, SAGphno, SAGpw } = req.body;
+  client
+    .query("select * from users where uid = $1", [SAGid])
+    .then((data) => {
+      if (data.rowCount == 1) {
+        res.send({ msg: "duplicate name" });
+      } else {
+        client
+          .query(
+            "insert into users (uid, name, email, phno, account_type, gender, pw) values ($1, $2, $3, $4, 'sag', $5, $6)",
+            [SAGid, SAGname, SAGemail, SAGphno, SAGgender, SAGpw]
+          )
+          .then((x) => {
+            if (x.rowCount == 1) {
+              res.send({ msg: "success" });
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+            res.send({ msg: "error" });
+          });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      res.send({ msg: "error" });
+    });
+};
+
 module.exports = {
   loginLogic,
   signUpLogic,
@@ -252,4 +312,7 @@ module.exports = {
   editFunction,
   addNewScheme,
   fetchHistory,
+  fetchAllSAGmembers,
+  deleteSAGmember,
+  addSAGmember,
 };

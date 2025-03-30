@@ -13,6 +13,9 @@ CREATE TABLE users (
     pw TEXT NOT NULL
 );
 
+insert into users (uid, name, email, phno, account_type, gender, pw) values ('sag-1', 'SAG - 1', 'sag-1.scholar.ease@gmail.com', '6371750963', 'sag', 'Male', 'sag@1010');
+
+
 insert into users (uid, name, email, phno, account_type, gender, pw) values ('admin', 'ADMIN', 'admin.scholar.ease@gmail.com', '6371750963', 'admin', 'Male', 'admin@1010');
 
 insert into users (uid, name, email, phno, account_type, gender, pw) values ('subham-tripathy', 'Subham Tripathy', 'subhamtripathy@gmail.com', '6371750963', 'student', 'Male', 'subham1010');

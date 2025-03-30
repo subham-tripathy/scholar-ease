@@ -13,6 +13,9 @@ const {
   editFunction,
   addNewScheme,
   fetchHistory,
+  fetchAllSAGmembers,
+  deleteSAGmember,
+  addSAGmember,
 } = require("./backendFunctions");
 
 const app = express();
@@ -90,6 +93,18 @@ app.post("/addScheme", (req, res) => {
 
 app.post("/fetchHistory", (req, res) => {
   fetchHistory(req, res);
+});
+
+app.post("/fetchAllSAGmembers", (req, res) => {
+  fetchAllSAGmembers(req, res);
+});
+
+app.post("/deleteSAGmember", (req, res) => {
+  deleteSAGmember(req, res);
+});
+
+app.post("/addSAGmember", (req, res) => {
+  addSAGmember(req, res);
 });
 
 app.listen(9898, "0.0.0.0", () => {

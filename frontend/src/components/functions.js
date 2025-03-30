@@ -119,8 +119,9 @@ export const closeEditAccountComponent = () => {
 export const openAddSchemePanel = () => {
   document.querySelector("#addSchemePanel").parentElement.style.scale = "1";
   setTimeout(() => {
-    document.querySelector("#addSchemePanel").parentElement.style.backdropFilter =
-      "blur(10px)";
+    document.querySelector(
+      "#addSchemePanel"
+    ).parentElement.style.backdropFilter = "blur(10px)";
   }, 200);
 };
 
@@ -128,4 +129,42 @@ export const closeAddSchemePanel = () => {
   document.querySelector("#addSchemePanel").parentElement.style.scale = "0";
   document.querySelector("#addSchemePanel").parentElement.style.backdropFilter =
     "blur(0px)";
+};
+
+export const openAddSAGPanel = () => {
+  document.querySelector("#addSAGPanel").parentElement.style.scale = "1";
+  setTimeout(() => {
+    document.querySelector("#addSAGPanel").parentElement.style.backdropFilter =
+      "blur(10px)";
+  }, 200);
+};
+
+export const closeAddSAGPanel = () => {
+  document.querySelector("#addSAGPanel").parentElement.style.scale = "0";
+  document.querySelector("#addSAGPanel").parentElement.style.backdropFilter =
+    "blur(0px)";
+};
+
+export const revealSAGDetailCard = (
+  account_type,
+  email,
+  gender,
+  name,
+  phno,
+  profile_pic,
+  uid
+) => {
+  const SAGcard = document.querySelector("#SAGDetailCard");
+  SAGcard.querySelector("#SAGname").textContent = "Name: " + name;
+  SAGcard.querySelector("#SAGemail").textContent = "Email: " + email;
+  SAGcard.querySelector("#SAGgender").textContent = "Gender: " + gender;
+  SAGcard.querySelector("#SAGphno").textContent = "Phone Number: " + phno;
+  // SAGcard.querySelector("#SAGaccount_type").textContent = "Account Type: " + account_type;
+  // SAGcard.querySelector("#SAGprofile_pic").textContent = profile_pic;
+  SAGcard.querySelector("#SAGuid").textContent = "SAG ID: " + uid;
+  SAGcard.parentElement.style.scale = "1";
+};
+
+export const closeSAGDetailCard = () => {
+  document.querySelector("#SAGDetailCard").parentElement.style.scale = "0";
 };

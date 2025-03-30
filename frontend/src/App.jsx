@@ -17,6 +17,7 @@ import PendingApplications from "./components/PendingApplications";
 import ExpiredScholarship from "./components/ExpiredScholarship";
 import ScholarshipReport from "./components/ScholarshipReport";
 import Apply from "./components/Apply";
+import SAGmembers from "./components/SAGmembers";
 
 const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -26,30 +27,28 @@ const App = () => {
       <BrowserRouter>
         <NavBar />
         <Routes>
-          <Route path="/" element={<Home />}></Route>
-          <Route path="/login" element={<Login />}></Route>
-          <Route path="/schemes" element={<Schemes />}></Route>
-          <Route path="/about" element={<About />}></Route>
-          <Route path="/signup" element={<Signup />}></Route>
-          <Route path="/dashboard" element={<Dashboard />}></Route>
-          <Route path="/admin" element={<Admin />}></Route>
-          <Route path="/apply" element={<Apply />}></Route>
-          <Route
-            path="/admin/listedschemes"
-            element={<AllListedSchemes />}
-          ></Route>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/schemes" element={<Schemes />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/apply" element={<Apply />} />
+          <Route path="/admin/listedschemes" element={<AllListedSchemes />} />
+          <Route path="/admin/sagmembers" element={<SAGmembers />} />
           <Route
             path="/admin/pendingapplications"
             element={<PendingApplications />}
-          ></Route>
+          />
           <Route
             path="/admin/expiredscholarship"
             element={<ExpiredScholarship />}
-          ></Route>
+          />
           <Route
             path="/admin/scholarshipreports"
             element={<ScholarshipReport />}
-          ></Route>
+          />
           <Route path="*" element={<NotFound />}></Route>
         </Routes>
       </BrowserRouter>
