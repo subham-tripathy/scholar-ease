@@ -37,19 +37,10 @@ const App = () => {
           <Route path="/apply" element={<Apply />} />
           <Route path="/admin/listedschemes" element={<AllListedSchemes />} />
           <Route path="/admin/sagmembers" element={<SAGmembers />} />
-          <Route
-            path="/admin/pendingapplications"
-            element={<PendingApplications />}
-          />
-          <Route
-            path="/admin/expiredscholarship"
-            element={<ExpiredScholarship />}
-          />
-          <Route
-            path="/admin/scholarshipreports"
-            element={<ScholarshipReport />}
-          />
-          <Route path="*" element={<NotFound />}></Route>
+          <Route path="/admin/pendingapplications" element={<PendingApplications />} />
+          <Route path="/admin/expiredscholarship" element={<ExpiredScholarship />} />
+          <Route path="/admin/scholarshipreports" element={<ScholarshipReport />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </loggedInContext.Provider>

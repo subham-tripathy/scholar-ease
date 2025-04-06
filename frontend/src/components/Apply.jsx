@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import Footer from "./Footer";
-import { BACKEND_BASE_URL, errorToast } from "./functions";
+import { BACKEND_BASE_URL, errorToast, successToast } from "./functions";
 
 const Apply = () => {
   document.title = "Scholar Ease - Application Form";
@@ -107,7 +107,7 @@ const Apply = () => {
       .then((data) => {
         console.log(data);
         if (data.msg == "success") {
-          successToast(data.message);
+          successToast("Apllied Successfully");
         } else {
           errorToast("Internal Error Occurred");
         }

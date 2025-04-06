@@ -87,58 +87,70 @@ const fetchAllSchemes = (req, res) => {
 };
 
 const applyFunction = (req, res) => {
-  console.log(req.body);
-  console.log(req.files);
-  const {
-    student_id,
-    full_name,
-    date_of_birth,
-    gender,
-    nationality,
-    contact_number,
-    email,
-    address,
-    class_10_board,
-    class_10_passing_year,
-    class_10_percentage,
-    class_12_type,
-    class_12_board,
-    class_12_passing_year,
-    class_12_percentage,
-    father_name,
-    father_occupation,
-    mother_name,
-    mother_occupation,
-    family_income,
-    scholarship_id,
-  } = req.body;
-  client
-    .query(
-      "INSERT into scholarship_applicants (student_id, full_name, date_of_birth, gender, nationality, contact_number, email, address, class_10_board, class_10_passing_year, class_10_percentage, class_12_type, class_12_board, class_12_passing_year, class_12_percentage, father_name, father_occupation, mother_name, mother_occupation, family_income, scholarship_id ) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21)",
-      [
-        student_id,
-        full_name,
-        date_of_birth,
-        gender,
-        nationality,
-        contact_number,
-        email,
-        address,
-        class_10_board,
-        class_10_passing_year,
-        class_10_percentage,
-        class_12_type,
-        class_12_board,
-        class_12_passing_year,
-        class_12_percentage,
-        father_name,
-        father_occupation,
-        mother_name,
-        mother_occupation,
-        family_income,
-        scholarship_id,
-      ]
-    )
+  const body = req.body;
+  const files = req.files;
+
+  const getFileBuffer = (field) => {
+    return files[field] ? files[field][0].buffer : null;
+  };
+
+  const query = `
+      INSERT INTO scholarship_applicants (
+        student_id, full_name, date_of_birth, gender, nationality,
+        contact_number, email, address, photograph, digital_signature,
+        class_10_board, class_10_passing_year, class_10_percentage, class_10_certificate,
+        class_12_type, class_12_board, class_12_passing_year, class_12_percentage, class_12_certificate,
+        father_name, father_occupation, mother_name, mother_occupation, family_income,
+        scholarship_id, identity_proof, residence_certificate, income_certificate,
+        caste_certificate, pan_card, bank_account_number, ifsc_code, passbook_photo
+      ) VALUES (
+        $1, $2, $3, $4, $5,
+        $6, $7, $8, $9, $10,
+        $11, $12, $13, $14,
+        $15, $16, $17, $18, $19,
+        $20, $21, $22, $23, $24,
+        $25, $26, $27, $28,
+        $29, $30, $31, $32, $33
+      ) RETURNING serial_no;
+    `;
+
+  const values = [
+    body.student_id,
+    body.full_name,
+    body.date_of_birth,
+    body.gender,
+    body.nationality,
+    body.contact_number,
+    body.email,
+    body.address,
+    getFileBuffer('photograph'),
+    getFileBuffer('digital_signature'),
+    body.class_10_board,
+    body.class_10_passing_year,
+    body.class_10_percentage,
+    getFileBuffer('class_10_certificate'),
+    body.class_12_type,
+    body.class_12_board,
+    body.class_12_passing_year,
+    body.class_12_percentage,
+    getFileBuffer('class_12_certificate'),
+    body.father_name,
+    body.father_occupation,
+    body.mother_name,
+    body.mother_occupation,
+    body.family_income,
+    body.scholarship_id,
+    getFileBuffer('aadhar_card'), // assuming this is identity_proof
+    getFileBuffer('residence_certificate'),
+    getFileBuffer('income_certificate'),
+    getFileBuffer('caste_certificate'),
+    getFileBuffer('pan_card'),
+    body.bank_account_number,
+    body.ifsc_code,
+    getFileBuffer('passbook_photo')
+  ];
+
+  client.query(query, values)
     .then((data) => {
       if (data.rowCount == 1) {
         res.send({ msg: "success" });
@@ -155,6 +167,7 @@ const fetchScholarShipDetail = (req, res) => {
   client
     .query("select * from all_scholarships where scheme_id = $1", [uid])
     .then((data) => {
+      // console.log(data)
       res.send(data.rows);
     })
     .catch((err) => {
@@ -301,6 +314,12 @@ const addSAGmember = (req, res) => {
     });
 };
 
+const fetchPendingApplications = (req, res) => {
+  client.query("select * from scholarship_applicants")
+    .then(data => { res.send(data.rows) })
+    .catch(err => { console.log(err); res.send({ status: "error" }) })
+}
+
 module.exports = {
   loginLogic,
   signUpLogic,
@@ -315,4 +334,5 @@ module.exports = {
   fetchAllSAGmembers,
   deleteSAGmember,
   addSAGmember,
+  fetchPendingApplications,
 };

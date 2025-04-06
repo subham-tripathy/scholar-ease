@@ -16,6 +16,7 @@ const {
   fetchAllSAGmembers,
   deleteSAGmember,
   addSAGmember,
+  fetchPendingApplications,
 } = require("./backendFunctions");
 
 const app = express();
@@ -43,13 +44,7 @@ app.post("/fetchAllSchemes", (req, res) => {
   fetchAllSchemes(req, res);
 });
 
-var storage = multer.diskStorage({
-  destination: "./uploads/",
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + path.extname(file.originalname));
-  },
-});
-
+var storage = multer.memoryStorage();
 var upload = multer({ storage });
 
 app.post(
@@ -63,6 +58,8 @@ app.post(
     { name: "residence_certificate", maxCount: 1 },
     { name: "income_certificate", maxCount: 1 },
     { name: "pan_card", maxCount: 1 },
+    { name: "passbook_photo", maxCount: 1 },
+    { name: "caste_certificate", maxCount: 1 },
   ]),
   applyFunction
 );
@@ -105,6 +102,10 @@ app.post("/deleteSAGmember", (req, res) => {
 
 app.post("/addSAGmember", (req, res) => {
   addSAGmember(req, res);
+});
+
+app.post("/fetchPendingApplications", (req, res) => {
+  fetchPendingApplications(req, res);
 });
 
 app.listen(9898, "0.0.0.0", () => {

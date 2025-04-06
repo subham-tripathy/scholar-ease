@@ -68,25 +68,8 @@ CREATE TABLE user_details(
     passbook_photo BYTEA,
 
     digital_signature BYTEA,
-
 );
 
-
-
-
-CREATE TABLE all_scholarships (
-    scheme_id VARCHAR(50) PRIMARY KEY,
-    scheme_name TEXT NOT NULL,
-    scheme_amount INT NOT NULL,
-    scheme_eligibility_class_12_cgpa,
-    scheme_eligibility_class_10_cgpa,
-    scheme_eligibility_category,
-    scheme_eligibility_gender,
-    scheme_category TEXT NOT NULL,
-    scheme_deadline DATE NOT NULL,
-    scheme_desc TEXT NOT NULL,
-    scheme_img TEXT NOT NULL
-);
 
 
 
@@ -100,20 +83,20 @@ CREATE TABLE scholarship_applicants (
     contact_number VARCHAR(15) NOT NULL UNIQUE,
     email VARCHAR(255) NOT NULL UNIQUE,
     address TEXT NOT NULL,
-    photograph VARCHAR(255),
-    digital_signature VARCHAR(255),
+    photograph BYTEA,
+    digital_signature BYTEA,
 
     -- Academic details
     class_10_board VARCHAR(100) NOT NULL,
     class_10_passing_year INT CHECK (class_10_passing_year > 1900),
     class_10_percentage DECIMAL(5,2) CHECK (class_10_percentage BETWEEN 0 AND 100),
-    class_10_certificate VARCHAR(255),
+    class_10_certificate BYTEA,
 
     class_12_type VARCHAR(10) CHECK (class_12_type IN ('12th', 'Diploma')) NOT NULL,
     class_12_board VARCHAR(100),
     class_12_passing_year INT CHECK (class_12_passing_year > 1900),
     class_12_percentage DECIMAL(5,2) CHECK (class_12_percentage BETWEEN 0 AND 100),
-    class_12_certificate VARCHAR(255),
+    class_12_certificate BYTEA,
 
     -- Family details
     father_name VARCHAR(255) NOT NULL,
@@ -126,14 +109,14 @@ CREATE TABLE scholarship_applicants (
     scholarship_id VARCHAR(50) NOT NULL,
 
     -- Document uploads
-    identity_proof VARCHAR(255),
-    residence_certificate VARCHAR(255),
-    income_certificate VARCHAR(255),
-    caste_certificate VARCHAR(255),
-    pan_card VARCHAR(255),
+    identity_proof BYTEA,
+    residence_certificate BYTEA,
+    income_certificate BYTEA,
+    caste_certificate BYTEA,
+    pan_card BYTEA,
     bank_account_number VARCHAR(20),
     ifsc_code VARCHAR(20),
-    passbook_photo VARCHAR(255),
+    passbook_photo BYTEA,
 
     application_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -152,20 +135,24 @@ CREATE TABLE all_scholarships (
     scheme_name VARCHAR(255) NOT NULL UNIQUE,
     scheme_amt INT NOT NULL,
     scheme_desc TEXT,
-    eligibility_criteria TEXT,
+    scheme_eligibility_class_12_cgpa DECIMAL(3,2),
+    scheme_eligibility_class_10_cgpa DECIMAL(3,2),
+    scheme_eligibility_category VARCHAR(100),
+    scheme_eligibility_gender VARCHAR(10),
     deadline DATE
 );
 
 
 
-INSERT INTO all_scholarships (scheme_name, scheme_amt, scheme_desc, eligibility_criteria, deadline) VALUES
-('Academic Excellence Scholarship', 1500, 'Awarded to students with top academic performance in their respective courses.', 'Must have a GPA of 3.8 or higher.', '2025-06-30'),
-('Merit-Based Scholarship', 2000, 'For students demonstrating exceptional academic ability and achievements.', 'Open to students with a GPA of 3.5 or above.', '2025-05-15'),
-('Community Leadership Scholarship', 1000, 'Given to students actively involved in community service and leadership roles.', 'Minimum 50 hours of community service in the past year.', '2025-08-20'),
-('Sports Achievement Scholarship', 1200, 'For athletes who have demonstrated excellence in their respective sports.', 'Must be a varsity athlete in a recognized sport.', '2025-07-01'),
-('Research Grant Scholarship', 2500, 'Provides funding to students pursuing advanced research projects in various fields.', 'Must be enrolled in a graduate program or higher.', '2025-09-15'),
-('STEM Scholarship', 1800, 'Awarded to students majoring in Science, Technology, Engineering, or Mathematics fields.', 'Must be enrolled in a STEM major.', '2025-10-10'),
-('International Student Scholarship', 2200, 'A scholarship for international students to support their education abroad.', 'Only open to international students.', '2025-06-25'),
-('Arts and Culture Scholarship', 1300, 'For students pursuing studies in the arts, including music, theatre, and visual arts.', 'Must be enrolled in an arts program or have a portfolio submission.', '2025-07-30'),
-('Financial Need Scholarship', 1600, 'Assists students who demonstrate significant financial need for their education.', 'Applicant must provide proof of financial need.', '2025-05-30'),
-('Entrepreneurship Scholarship', 1400, 'Awarded to students with a strong interest in business and entrepreneurship initiatives.', 'Must have a business plan or startup idea.', '2025-06-10');
+
+INSERT INTO all_scholarships ( scheme_name, scheme_amt, scheme_desc, scheme_eligibility_class_12_cgpa, scheme_eligibility_class_10_cgpa, scheme_eligibility_category, scheme_eligibility_gender, deadline ) VALUES
+('Academic Excellence Scholarship', 1500, 'Awarded to students with top academic performance in their respective courses.', 3.8, 3.8, NULL, 'Any', '2025-06-30'),
+('Merit-Based Scholarship', 2000, 'For students demonstrating exceptional academic ability and achievements.', 3.5, 3.5, NULL, 'Any', '2025-05-15'),
+('Community Leadership Scholarship', 1000, 'Given to students actively involved in community service and leadership roles.', NULL, NULL, 'Community Service', 'Any', '2025-08-20'),
+('Sports Achievement Scholarship', 1200, 'For athletes who have demonstrated excellence in their respective sports.', NULL, NULL, 'Sports', 'Any', '2025-07-01'),
+('Research Grant Scholarship', 2500, 'Provides funding to students pursuing advanced research projects in various fields.', NULL, NULL, 'Graduate', 'Any', '2025-09-15'),
+('STEM Scholarship', 1800, 'Awarded to students majoring in Science, Technology, Engineering, or Mathematics fields.', NULL, NULL, 'STEM', 'Any', '2025-10-10'),
+('International Student Scholarship', 2200, 'A scholarship for international students to support their education abroad.', NULL, NULL, 'International', 'Any', '2025-06-25'),
+('Arts and Culture Scholarship', 1300, 'For students pursuing studies in the arts, including music, theatre, and visual arts.', NULL, NULL, 'Arts', 'Any', '2025-07-30'),
+('Financial Need Scholarship', 1600, 'Assists students who demonstrate significant financial need for their education.', NULL, NULL, 'Financial Need', 'Any', '2025-05-30'),
+('Entrepreneurship Scholarship', 1400, 'Awarded to students with a strong interest in business and entrepreneurship initiatives.', NULL, NULL, 'Entrepreneurship', 'Any', '2025-06-10');

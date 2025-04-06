@@ -56,7 +56,7 @@ const Dashboard = () => {
   return (
     <>
       <main className="bg-gray-200 min-h-[89vh] pt-5">
-        <div className="relative w-[90%] mx-auto rounded-lg border-3 border-white shadow-md shadow-gray-700 flex bg-[#4285F4] text-white">
+        <div className="relative w-[90%] mx-auto rounded-lg border-3 border-white shadow-md shadow-gray-700 flex bg-blue-700 text-white">
           <button
             className="absolute w-12 right-3 top-2 bg-white rounded-full p-2 cursor-pointer"
             onClick={() => {
