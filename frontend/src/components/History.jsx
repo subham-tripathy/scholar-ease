@@ -4,7 +4,6 @@ import HistoryCard from "./HistoryCard";
 
 const History = () => {
   const uid = localStorage.getItem("scholar-ease-uid");
-  const [applyDetail, setApplyDetail] = useState(null);
   const [schemeDetail, setSchemeDetail] = useState(null);
   useEffect(() => {
     fetch(BACKEND_BASE_URL + "/fetchHistory", {
@@ -14,7 +13,6 @@ const History = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        // console.log(data[0].scholarship_id);
         fetch(BACKEND_BASE_URL + "/fetchScholarShipDetail", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -31,7 +29,7 @@ const History = () => {
   }, []);
 
   return (
-    <div className="mt-10">
+    <div className="mt-10 px-5">
       <h1 className="text-3xl font-bold text-center">History</h1>
       {schemeDetail != null ? (
         schemeDetail.map((e) => <HistoryCard key={e.scheme_id} arr={e} />)

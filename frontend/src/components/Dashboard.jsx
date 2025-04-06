@@ -40,15 +40,12 @@ const Dashboard = () => {
         if (data[0].account_type === "admin") {
           navigate("/admin");
         } else {
-          setTimeout(() => {
-            document.getElementById("dashboardName").textContent = data[0].name;
-            document.getElementById("dashboardUID").textContent = data[0].uid;
-            document.getElementById("dashboardEmail").textContent =
-              data[0].email;
-            document.getElementById("dashboardPhno").textContent = data[0].phno;
-            document.getElementById("dashboardType").textContent =
-              "Account Type: " + data[0].account_type;
-          }, 200);
+          document.getElementById("dashboardName").textContent = data[0].name;
+          document.getElementById("dashboardUID").textContent = data[0].uid;
+          document.getElementById("dashboardEmail").textContent = data[0].email;
+          document.getElementById("dashboardPhno").textContent = data[0].phno;
+          document.getElementById("dashboardType").textContent =
+            "Account Type: " + data[0].account_type;
         }
       });
   }, [reloadDashboard]);
